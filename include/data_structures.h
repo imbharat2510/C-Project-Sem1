@@ -10,13 +10,7 @@ struct Equipment{
     int id;
     char name[MAX_NAME_LEN];
     float price;
-    int manufacturer_id;
+    char manufacturer_name[MAX_NAME_LEN];
     int quantity;
-};
-
-struct Manufacturer{
-    int id;
-    char name[MAX_NAME_LEN];
-    char contact[MAX_CONTACT_LEN];
 };
 

@@ -19,15 +19,15 @@ void addEquipment(){
     printf("Enter Price: ");
     scanf("%f",&e.price);
 
-    printf("Enter Manufacturer ID: ");
-    scanf("%d",&e.manufacturer_id);
+    printf("Enter Manufacturer Name: ");
+    scanf("%s",e.manufacturer_name);
 
     FILE *fp=fopen("data/equipment.txt","a");
     if (fp==NULL){
         printf("Error opening equipment file!\n");
         return;
     }
-    fprintf(fp,"%d %s %d %.2f %d\n",e.id,e.name,e.quantity,e.price,e.manufacturer_id);
+    fprintf(fp,"%d %s %d %.2f %s\n",e.id,e.name,e.quantity,e.price,e.manufacturer_name);
     fclose(fp);
 
     printf("Equipement added successfully!\n");
@@ -43,12 +43,12 @@ void viewEquipment(){
     }
     printf("\n--- Equipment List ---\n");
 
-    while (fscanf(fp, "%d %s %d %f %d",&e.id,e.name,&e.quantity,&e.price,&e.manufacturer_id)==5){
+    while (fscanf(fp, "%d %s %d %f %s",&e.id,e.name,&e.quantity,&e.price,e.manufacturer_name)==5){
         printf("ID: %d\n",e.id);
         printf("Name: %s\n",e.name);
         printf("Quantity: %d\n",e.quantity);
         printf("Price: %.2f\n",e.price);
-        printf("Manufacturer ID: %d\n\n",e.manufacturer_id);
+        printf("Manufacturer Name: %s\n\n",e.manufacturer_name);
     }
     fclose(fp);
 }
@@ -68,12 +68,13 @@ void searchEquipment(){
         printf("No equipment data found.\n");
         return ;
     }
-    while(fscanf(fp,"%d %s %d %f %d",&e.id,e.name,&e.quantity,&e.price,&e.manufacturer_id)==5){
+    while(fscanf(fp,"%d %s %d %f %s",&e.id,e.name,&e.quantity,&e.price,e.manufacturer_name)==5){
         if(e.id==searchid){
             printf("\n--- Equipment Found ---\n");
             printf("Name: %s\n",e.name);
             printf("Quantity: %d\n",e.quantity);
-            printf("Manufacturer ID: %d\n",e.manufacturer_id);
+            printf("Price: %.2f\n",e.price);
+            printf("Manufacturer Name: %s\n",e.manufacturer_name);
             found=1;
             break;
         }
@@ -101,11 +102,11 @@ void updateEquipment(){
         return;
     }
     FILE *temp=fopen("data/temp_equipment.txt","w");
-    while(fscanf(fp,"%d %s %d %f %d",&e.id,e.name,&e.quantity,&e.price,&e.manufacturer_id)==5){
+    while(fscanf(fp,"%d %s %d %f %s",&e.id,e.name,&e.quantity,&e.price,e.manufacturer_name)==5){
         if(e.id==targetid){
             found=1;
             printf("\nCurrent details: \n");
-            printf("ID: %d\nName: %s\nQuantity: %d\nPrice: %.2f\nManufacturer ID: %d\n\n",e.id,e.name,e.quantity,e.price,e.manufacturer_id);
+            printf("ID: %d\nName: %s\nQuantity: %d\nPrice: %.2f\nManufacturer Name: %s\n\n",e.id,e.name,e.quantity,e.price,e.manufacturer_name);
 
             printf("Enter new name (no spaces): ");
             scanf("%s",e.name);
@@ -113,14 +114,14 @@ void updateEquipment(){
             scanf("%d",&e.quantity);
             printf("Enter new Price: ");
             scanf("%f",&e.price);
-            printf("Enter new Manufacturer ID: ");
-            scanf("%d",&e.manufacturer_id);
+            printf("Enter new Manufacturer Name: ");
+            scanf("%s",e.manufacturer_name);
             
 
-            fprintf(temp,"%d %s %d %.2f %d\n",e.id,e.name,e.quantity,e.price,e.manufacturer_id);
+            fprintf(temp,"%d %s %d %.2f %s\n",e.id,e.name,e.quantity,e.price,e.manufacturer_name);
         }
         else{
-            fprintf(temp,"%d %s %d %.2f %d\n",e.id,e.name,e.quantity,e.price,e.manufacturer_id);
+            fprintf(temp,"%d %s %d %.2f %s\n",e.id,e.name,e.quantity,e.price,e.manufacturer_name);
         }
     }
     fclose(fp);
@@ -157,13 +158,13 @@ void deleteEquipment(){
 
     FILE *temp=fopen("data/temp_equipment.txt","w");
     
-    while(fscanf(fp,"%d %s %d %f %d",&e.id,e.name,&e.quantity,&e.price,&e.manufacturer_id)==5){
+    while(fscanf(fp,"%d %s %d %f %s",&e.id,e.name,&e.quantity,&e.price,e.manufacturer_name)==5){
         if(e.id==targetid){
             found=1;
             continue;
         }
         else{
-            fprintf(temp,"%d %s %d %.2f %d\n",e.id,e.name,e.quantity,e.price,e.manufacturer_id);
+            fprintf(temp,"%d %s %d %.2f %s\n",e.id,e.name,e.quantity,e.price,e.manufacturer_name);
         }
     }
     fclose(fp);
