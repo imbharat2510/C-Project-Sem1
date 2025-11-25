@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <"../include/login.h">"
+#include "../include/login.h"
 int admin(){
 	struct credential k,l;
 	char a[20];
@@ -11,7 +11,7 @@ int admin(){
 		printf("\nAdmin name: ");
 		scanf("%s",k.name);
 		printf("\nPassword: ");
-		scanf("%d",k.password);
+		scanf("%d",&k.password);
 	
 	FILE *fp=fopen("../data/admin","r");
 	if (fp==NULL){return -1;}

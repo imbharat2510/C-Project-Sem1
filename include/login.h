@@ -1,3 +1,4 @@
+#pragma once
 #ifndef LOGIN_H
 #define LOGIN_H
 
@@ -8,7 +9,7 @@ struct credential {
 
 void sign_up(void);
 void sign_in(void);
-void admin(void);
+int admin(void);
 
 #endif
 

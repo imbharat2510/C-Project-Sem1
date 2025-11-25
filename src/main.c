@@ -1,110 +1,148 @@
-/* src/main.c
-   Uses the functions implemented in your uploaded files:
-     - login.c: admin(), sign_up(), sign_in() (as uploaded). See login.c. :contentReference[oaicite:1]{index=1}
-     - borrower.c / equipment.c / inventory.c: functions declared in their headers
-*/
-
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
 #include "../include/login.h"
-#include "../include/borrower.h"
 #include "../include/equipment.h"
+#include "../include/borrower.h"
 #include "../include/inventory.h"
 
-int main(void) {
-    int choice;
+int main() {
+    int role;
+    printf("Select role:\n");
+    printf("1. Admin\n");
+    printf("2. Student\n");
+    printf("Enter your choice: ");
+    scanf("%d", &role);
 
-    while (1) {
-        printf("\n====== SPORTS EQUIPMENT MANAGING SYSTEM ======\n");
-        printf("============== LOGIN SYSTEM ==================\n");
-        printf("1. Sign Up\n");
-        printf("2. Sign In\n");
-        printf("3. Admin Login\n");
-        printf("4. Borrower Menu\n");
-        printf("5. Exit\n");
-        printf("Enter choice: ");
-        if (scanf("%d", &choice) != 1) {
-            int c; while ((c = getchar()) != '\n' && c != EOF) {}
-            printf("Invalid input.\n");
-            continue;
-        }
-
-        if (choice == 1) {
-            sign_up();   /* from login.c (void) */
-        }
-        else if (choice == 2) {
-            sign_in();   /* from login.c (void) — it prints success/failure itself */
-        }
-        else if (choice == 3) {
-            int r = admin();  /* from login.c (returns int) */
-            if (r == 1) {
-                int achoice = 0;
-                while (1) {
-                    printf("\n--- ADMIN MENU ---\n");
-                    printf("1. Add Equipment\n");
-                    printf("2. View Equipment\n");
-                    printf("3. Search Equipment\n");
-                    printf("4. Update Equipment\n");
-                    printf("5. Delete Equipment\n");
-                    printf("6. Add Inventory\n");
-                    printf("7. View Inventory\n");
-                    printf("8. Search Inventory\n");
-                    printf("9. Update Inventory Quantity\n");
-                    printf("10. Back to Main Menu\n");
-                    printf("Enter choice: ");
-                    if (scanf("%d", &achoice) != 1) { int c; while ((c = getchar()) != '\n' && c != EOF) {} printf("Invalid input.\n"); continue; }
-
-                    if (achoice == 1) addEquipment();
-                    else if (achoice == 2) viewEquipment();
-                    else if (achoice == 3) searchEquipment();
-                    else if (achoice == 4) updateEquipment();
-                    else if (achoice == 5) deleteEquipment();
-                    else if (achoice == 6) addInventory();
-                    else if (achoice == 7) viewInventory();
-                    else if (achoice == 8) searchInventory();
-                    else if (achoice == 9) updateInventoryQuantity();
-                    else if (achoice == 10) break;
-                    else printf("Invalid choice.\n");
-                }
-            } else {
-                if (r == 0) printf("Wrong password.\n");
-                else if (r == 2) printf("Incorrect passkey.\n");
-                else if (r == 3) printf("Admin name not found.\n");
-                else if (r == -1) printf("Admin file missing.\n");
-                else printf("Unknown admin error code: %d\n", r);
-            }
-        }
-        else if (choice == 4) {
-            /* Borrower menu — sign_in() is void in your login.c,
-               so main cannot auto-detect login success. We call the borrower functions directly.
-               If you want main to require a successful sign-in before allowing borrowing,
-               change sign_in() to return int and set current_user; I can do that. */
-            int bchoice = 0;
-            while (1) {
-                printf("\n--- BORROWER MENU ---\n");
-                printf("1. Borrow Equipment\n");
-                printf("2. View Borrowers\n");
-                printf("3. Search Borrower\n");
-                printf("4. Return Borrowed Equipment\n");
-                printf("5. Back to Main Menu\n");
-                printf("Enter choice: ");
-                if (scanf("%d", &bchoice) != 1) { int c; while ((c = getchar()) != '\n' && c != EOF) {} printf("Invalid input.\n"); continue; }
-
-                if (bchoice == 1) addBorrower();
-                else if (bchoice == 2) viewBorrowers();
-                else if (bchoice == 3) searchBorrower();
-                else if (bchoice == 4) returnBorrowedItem();
-                else if (bchoice == 5) break;
-                else printf("Invalid choice.\n");
-            }
-        }
-        else if (choice == 5) {
-            printf("Goodbye!\n");
+    if (role == 1) {
+        int adminStatus = admin();
+        if (adminStatus != 1) {
+            printf("Admin login failed.\n");
             return 0;
         }
-        else {
-            printf("Invalid choice.\n");
-        }
+        int choice;
+        do {
+            printf("\n--- Admin Menu ---\n");
+            printf("1. Manage Equipment\n");
+            printf("2. Manage Inventory\n");
+            printf("3. View Borrowers\n");
+            printf("4. Search Borrower by ID\n");
+            printf("5. Search Equipment by ID\n");
+            printf("6. Remove Equipment\n");
+            printf("7. Logout/Exit\n");
+            printf("Enter your choice: ");
+            scanf("%d", &choice);
+
+            switch (choice) {
+                case 1: {
+                    int emChoice;
+                    do {
+                        printf("\n--- Manage Equipment ---\n");
+                        printf("1. Add Equipment\n");
+                        printf("2. View Equipment\n");
+                        printf("3. Update Equipment\n");
+                        printf("4. Back\n");
+                        printf("Enter your choice: ");
+                        scanf("%d", &emChoice);
+                        switch (emChoice) {
+                            case 1:
+                                addEquipment();
+                                break;
+                            case 2:
+                                viewEquipment();
+                                break;
+                            case 3:
+                                updateEquipment();
+                                break;
+                            case 4:
+                                break;
+                            default:
+                                printf("Invalid choice in Manage Equipment.\n");
+                        }
+                    } while (emChoice != 4);
+                    break;
+                }
+                case 2: {
+                    int invChoice;
+                    do {
+                        printf("\n--- Manage Inventory ---\n");
+                        printf("1. Add Inventory\n");
+                        printf("2. View Inventory\n");
+                        printf("3. Search Inventory by ID\n");
+                        printf("4. Update Inventory Quantity\n");
+                        printf("5. Back\n");
+                        printf("Enter your choice: ");
+                        scanf("%d", &invChoice);
+                        switch (invChoice) {
+                            case 1:
+                                addInventory();
+                                break;
+                            case 2:
+                                viewInventory();
+                                break;
+                            case 3:
+                                searchInventory();
+                                break;
+                            case 4:
+                                updateInventoryQuantity();
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                printf("Invalid choice in Manage Inventory.\n");
+                        }
+                    } while (invChoice != 5);
+                    break;
+                }
+                case 3:
+                    viewBorrowers();
+                    break;
+                case 4:
+                    searchBorrower();
+                    break;
+                case 5:
+                    searchEquipment();
+                    break;
+                case 6:
+                    deleteEquipment();
+                    break;
+                case 7:
+                    printf("Logging out...\n");
+                    break;
+                default:
+                    printf("Invalid choice in Admin Menu.\n");
+            }
+        } while (choice != 7);
+    } else if (role == 2) {
+        sign_in();
+        int stuChoice;
+        do {
+            printf("\n--- Student Menu ---\n");
+            printf("1. Search Equipment by ID\n");
+            printf("2. Borrow Equipment\n");
+            printf("3. Return Equipment\n");
+            printf("4. Logout/Exit\n");
+            printf("Enter your choice: ");
+            scanf("%d", &stuChoice);
+            switch (stuChoice) {
+                case 1:
+                    searchEquipment();
+                    break;
+                case 2:
+                    addBorrower();
+                    break;
+                case 3:
+                    returnBorrowedItem();
+                    break;
+                case 4:
+                    printf("Logging out...\n");
+                    break;
+                default:
+                    printf("Invalid choice in Student Menu.\n");
+            }
+        } while (stuChoice != 4);
+    } else {
+        printf("Invalid role selected.\n");
     }
 
     return 0;
