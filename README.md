@@ -11,7 +11,6 @@ This contains all the permanent data files.
 This contains all the C program files and program and Makefile.
 ### Include
 This includes all the header files.
-
 ## Instructions
 - First clone the repository
   https://github.com/imbharat2510/C-Project-Sem1.git
