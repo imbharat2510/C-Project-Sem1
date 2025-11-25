@@ -64,6 +64,38 @@ void sign_up(){
 			
 }
 
-void sign_in(){
+void sign_in() {
+    struct credential user;
+    char file_name[20];
+    int file_password;
+
+    printf("\nEnter username: ");
+    scanf("%19s", user.name);
+
+    printf("Enter password: ");
+    scanf("%d", &user.password);
+
+    FILE *fp = fopen("../data/login.txt", "r");
+    if (fp == NULL) {
+        printf("Could not open login file.\n");
+        return;
+    }
+
+    while (fscanf(fp, "%19s %d", file_name, &file_password) == 2) {
+        if (strcmp(file_name, user.name) == 0) {
+            if (file_password == user.password) {
+                printf("Login successful. Welcome, %s!\n", user.name);
+            } else {
+                printf("Wrong password.\n");
+            }
+            fclose(fp);
+            return;
+        }
+    }
+
+    fclose(fp);
+    printf("User not found.\n");
+}
+
 
 
