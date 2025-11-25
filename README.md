@@ -16,12 +16,12 @@ This includes all the header files.
 ## Instructions
 1.First clone the repository
   https://github.com/imbharat2510/C-Project-Sem1.git
-2.Use ./program
+- 2.Use ./program
 
 ## Credits
 ------SYNTAX SQUAD------
-Aditya Konda  | BE2025001
-Sanyam Kocher | BA2025
-Bharat Pawle  | BE2025007
+- Aditya Konda  | BE2025001
+- Sanyam Kocher | BA2025
+- Bharat Pawle  | BE2025007
 
 
