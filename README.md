@@ -19,8 +19,8 @@ This includes all the header files.
 
 ## Credits
 ------SYNTAX SQUAD------
-- Aditya Konda  | BE2025001
-- Sanyam Kocher | BA2025043
-- Bharat Pawle  | BE2025007
+- Aditya Konda   | BE2025001
+- Sanyam Kocher  | BA2025043
+- Bharat Pawle   | BE2025007
 
 
