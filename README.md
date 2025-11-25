@@ -1,5 +1,4 @@
-# Report
-- A Sports Equipment Management System.
+# A Sports Equipment Management System.
 
 ## Features
 - A clean terminal based UI
