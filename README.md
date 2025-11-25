@@ -1,7 +1,7 @@
-# Report:
+# Report
 A Sports Equipment Management System.
 
-## Features:
+## Features
 A clean terminal based UI
 Seperate menus for student and admin
 Admin can add, view, search, update, delete, issue, take returns, view boorrow history of equipment
