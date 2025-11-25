@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-struct credential{
-	char name[20];
-	int password;
-};
+#include <"../include/login.h">"
 int admin(){
 	struct credential k,l;
 	char a[20];
