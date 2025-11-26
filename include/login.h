@@ -8,7 +8,7 @@ struct credential {
 };
 
 void sign_up(void);
-void sign_in(void);
+int sign_in(void);
 int admin(void);
 
 #endif

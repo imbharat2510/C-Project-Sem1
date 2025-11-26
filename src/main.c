@@ -24,12 +24,11 @@ int main() {
         do {
             printf("\n--- Admin Menu ---\n");
             printf("1. Manage Equipment\n");
-            printf("2. Manage Inventory\n");
-            printf("3. View Borrowers\n");
-            printf("4. Search Borrower by ID\n");
-            printf("5. Search Equipment by ID\n");
-            printf("6. Remove Equipment\n");
-            printf("7. Logout/Exit\n");
+            printf("2. View Borrowers\n");
+            printf("3. Search Borrower by ID\n");
+            printf("4. Search Equipment by ID\n");
+            printf("5. Remove Equipment\n");
+            printf("6. Logout/Exit\n");
             printf("Enter your choice: ");
             scanf("%d", &choice);
 
@@ -62,60 +61,34 @@ int main() {
                     } while (emChoice != 4);
                     break;
                 }
-                case 2: {
-                    int invChoice;
-                    do {
-                        printf("\n--- Manage Inventory ---\n");
-                        printf("1. Add Inventory\n");
-                        printf("2. View Inventory\n");
-                        printf("3. Search Inventory by ID\n");
-                        printf("4. Update Inventory Quantity\n");
-                        printf("5. Back\n");
-                        printf("Enter your choice: ");
-                        scanf("%d", &invChoice);
-                        switch (invChoice) {
-                            case 1:
-                                addInventory();
-                                break;
-                            case 2:
-                                viewInventory();
-                                break;
-                            case 3:
-                                searchInventory();
-                                break;
-                            case 4:
-                                updateInventoryQuantity();
-                                break;
-                            case 5:
-                                break;
-                            default:
-                                printf("Invalid choice in Manage Inventory.\n");
-                        }
-                    } while (invChoice != 5);
-                    break;
-                }
-                case 3:
+                case 2:
                     viewBorrowers();
                     break;
-                case 4:
+                case 3:
                     searchBorrower();
                     break;
-                case 5:
+                case 4:
                     searchEquipment();
                     break;
-                case 6:
+                case 5:
                     deleteEquipment();
                     break;
-                case 7:
+                case 6:
                     printf("Logging out...\n");
-                    break;
+                    return 0;
                 default:
                     printf("Invalid choice in Admin Menu.\n");
             }
         } while (choice != 7);
     } else if (role == 2) {
-        sign_in();
-        int stuChoice;
+        int kop;
+	printf("\n--- Student Login Menu ---\n");
+	printf("1. Sign in\n");
+	printf("2. Sign up (if new user)\n");
+	scanf("%d",&kop);
+	if (kop==1){
+		if (sign_in()==1){
+	int stuChoice;
         do {
             printf("\n--- Student Menu ---\n");
             printf("1. Search Equipment by ID\n");
@@ -140,9 +113,19 @@ int main() {
                 default:
                     printf("Invalid choice in Student Menu.\n");
             }
-        } while (stuChoice != 4);
-    } else {
-        printf("Invalid role selected.\n");
+        	} while (stuChoice != 4);
+		}
+		else if(sign_in()==3){
+			printf("\nTry signing up :) \n");
+			return 0;
+		}
+		else{
+		return 0;
+		}
+		}
+	else if (kop==2){
+		sign_up();
+	}
     }
 
     return 0;

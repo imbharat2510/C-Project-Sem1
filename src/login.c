@@ -13,7 +13,7 @@ int admin(){
 		printf("\nPassword: ");
 		scanf("%d",&k.password);
 	
-	FILE *fp=fopen("../data/admin","r");
+	FILE *fp=fopen("data/admin.txt","r");
 	if (fp==NULL){return -1;}
 	while(fscanf(fp,"%s %d",l.name,&l.password)==2){
 		if(strcmp(l.name,k.name)==0){
@@ -30,7 +30,7 @@ int admin(){
 }
 
 void sign_up(){
-	FILE *z=fopen("../data/login.txt","r+");
+	FILE *z=fopen("data/login.txt","r+");
 	struct credential k;
 	printf("\nEnter a username(max char 20): \n");
 	scanf("%s",k.name);
@@ -60,7 +60,7 @@ void sign_up(){
 			
 }
 
-void sign_in() {
+int sign_in() {
     struct credential user;
     char file_name[20];
     int file_password;
@@ -71,26 +71,29 @@ void sign_in() {
     printf("Enter password: ");
     scanf("%d", &user.password);
 
-    FILE *fp = fopen("../data/login.txt", "r");
+    FILE *fp = fopen("data/login.txt", "r");
     if (fp == NULL) {
         printf("Could not open login file.\n");
-        return;
+        return -1;
     }
 
     while (fscanf(fp, "%19s %d", file_name, &file_password) == 2) {
         if (strcmp(file_name, user.name) == 0) {
             if (file_password == user.password) {
                 printf("Login successful. Welcome, %s!\n", user.name);
-            } else {
+           	return 1;
+	    } 
+	    else {
                 printf("Wrong password.\n");
+		return 0;
             }
             fclose(fp);
-            return;
         }
     }
 
     fclose(fp);
     printf("User not found.\n");
+    return 3;
 }
 
 
