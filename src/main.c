@@ -27,38 +27,38 @@ int main() {
             printf("2. View Borrowers\n");
             printf("3. Search Borrower by ID\n");
             printf("4. Search Equipment by ID\n");
-            printf("5. Remove Equipment\n");
-            printf("6. Logout/Exit\n");
+            printf("5. Logout/Exit\n");
             printf("Enter your choice: ");
             scanf("%d", &choice);
 
             switch (choice) {
                 case 1: {
-                    int emChoice;
+                    int z;
                     do {
                         printf("\n--- Manage Equipment ---\n");
                         printf("1. Add Equipment\n");
                         printf("2. View Equipment\n");
                         printf("3. Update Equipment\n");
-                        printf("4. Back\n");
+			printf("4. Remove Equipment\n");
+                        printf("5. Back\n");
                         printf("Enter your choice: ");
-                        scanf("%d", &emChoice);
-                        switch (emChoice) {
-                            case 1:
+                        scanf("%d", &z);
+                        if(z==1){
                                 addEquipment();
-                                break;
-                            case 2:
+                               }
+                        else if(z==2){
                                 viewEquipment();
-                                break;
-                            case 3:
-                                updateEquipment();
-                                break;
-                            case 4:
-                                break;
-                            default:
-                                printf("Invalid choice in Manage Equipment.\n");
-                        }
-                    } while (emChoice != 4);
+                               }
+                        else if(z==3){
+                                updateEquipment();}
+			else if(z==4){
+				deleteEquipment();}
+			else if(z==5){
+                                break;}
+			    else{
+                                printf("Invalid choice in Manage Equipment.\n");}
+                        
+                    } while (1);
                     break;
                 }
                 case 2:
@@ -71,9 +71,6 @@ int main() {
                     searchEquipment();
                     break;
                 case 5:
-                    deleteEquipment();
-                    break;
-                case 6:
                     printf("Logging out...\n");
                     return 0;
                 default:
